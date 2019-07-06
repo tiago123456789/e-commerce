@@ -42,7 +42,7 @@ abstract class Repository
     }
 
     public function update($id, $datasModified) {
-        $this->getNamespaceModel()::where("id", $id)->update($id, $datasModified);
+        $this->getNamespaceModel()::where("id", $id)->update($datasModified);
     }
 
     private function getNamespaceModel() {

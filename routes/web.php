@@ -20,7 +20,9 @@ Auth::routes();
 Route::prefix("admin")
     ->group(function() {
         Route::get("users", "UserController@index")->name("user.list");
-        Route::post("users/new", "UserController@save")->name("user.new.post");
+        Route::post("users/new", "UserController@save")->name("user.new");
+        Route::get("users/{id}/edit", "UserController@edit")->name("user.edit.page");
+        Route::post("users/{id}/edit", "UserController@update")->name("user.edit");
         Route::get("users/new", "UserController@newPage")->name("user.new");
         Route::get("users/{id}/remove", "UserController@remove")->name("user.remove");
         Route::get('home', 'HomeController@index')->name('home');

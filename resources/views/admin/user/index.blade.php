@@ -10,6 +10,7 @@
     <div class="panel panel-default">
         <div class="panel-body">
             @include("elements.notifySuccess")
+            @include("elements.notifyError")
             <div class="table-responsive">
                 <table class="table table-bordered table-striped table-hover text-center">
                     <thead>
@@ -34,6 +35,10 @@
                                         <i class="fa fa-trash"></i>
                                     </a>
                                 @endif
+                                    <a href="{{ route("user.edit.page", [ "id" => $user["id"]]) }}"
+                                    class="btn btn-warning">
+                                        <i class="fa fa-pencil"></i>
+                                    </a>
                             </td>
                         </tr>
                      @endforeach

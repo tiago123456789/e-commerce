@@ -38,12 +38,31 @@ class UserBo
         $this->repository->save($newRegister);
     }
 
-    public function remove($id) {
+    public function findById($id) {
         $user = $this->repository->findById($id);
         if (!$user) {
             throw new NotFoundException(MessageException::NOT_FOUND_REGISTER, ["User"]);
         }
+
+        return $user;
+    }
+
+    public function remove($id) {
+        $this->findById($id);
         $this->repository->remove($id);
+    }
+
+    public function update($id, array $datasModified) {
+        $user = $this->findById($id);
+        $isChangePassword = (
+            array_key_exists("password", $datasModified)
+            && $user["password"] != $datasModified["password"]
+        );
+
+        if ($isChangePassword) {
+            $datasModified["password"] = Hash::make($datasModified["password"]);
+        }
+        $this->repository->update($id, $datasModified);
     }
 
 }
