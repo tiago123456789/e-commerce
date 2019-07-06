@@ -19,6 +19,13 @@ Auth::routes();
 
 Route::prefix("admin")
     ->group(function() {
+        Route::get("categories", "CategoryController@index")->name("category.list");
+        Route::get("categories/new", "CategoryController@newPage")->name("category.new");
+        Route::post("categories/new", "CategoryController@save")->name("category.new");
+        Route::get("categories/{id}/edit", "CategoryController@edit")->name("category.edit.page");
+        Route::post("categories/{id}/edit", "CategoryController@update")->name("category.edit");
+        Route::get("categories/{id}/remove", "CategoryController@remove")->name("category.remove");
+
         Route::get("users", "UserController@index")->name("user.list");
         Route::post("users/new", "UserController@save")->name("user.new");
         Route::get("users/{id}/edit", "UserController@edit")->name("user.edit.page");

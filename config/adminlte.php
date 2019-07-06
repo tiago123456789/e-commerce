@@ -145,6 +145,20 @@ return [
                     'url'     => 'admin/users/new',
                 ]
             ],
+        ],
+        [
+            'text'    => 'Categories',
+            'icon'    => 'list',
+            'submenu' => [
+                [
+                    'text' => 'List categories',
+                    'url'  => 'admin/categories',
+                ],
+                [
+                    'text'    => 'Create category',
+                    'url'     => 'admin/categories/new',
+                ]
+            ],
         ]
     ],
 

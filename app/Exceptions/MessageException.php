@@ -10,10 +10,12 @@ class MessageException
     CONST PARAM_DYNAMIC_MESSAGE = ":parameter";
 
     CONST EMAIL_USED = "EMAIL_USED";
+    CONST DESCRIPTION_USED = "DESCRIPTION_USED";
     CONST NOT_FOUND_REGISTER = "EMAIL_USED";
 
     private static $messages = [
         MessageException::EMAIL_USED => "Email used per other user.",
+        MessageException::DESCRIPTION_USED => "Description already used",
         MessageException::NOT_FOUND_REGISTER => MessageException::PARAM_DYNAMIC_MESSAGE . " not found!",
 
     ];
