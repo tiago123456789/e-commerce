@@ -19,6 +19,10 @@ Auth::routes();
 
 Route::prefix("admin")
     ->group(function() {
+        Route::get("products", "ProductController@index")->name("product.list");
+        Route::get("products/new", "ProductController@newPage")->name("product.new");
+        Route::post("products/new", "ProductController@save")->name("product.new");
+
         Route::get("categories", "CategoryController@index")->name("category.list");
         Route::get("categories/new", "CategoryController@newPage")->name("category.new");
         Route::post("categories/new", "CategoryController@save")->name("category.new");

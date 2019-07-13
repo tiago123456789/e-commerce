@@ -159,6 +159,20 @@ return [
                     'url'     => 'admin/categories/new',
                 ]
             ],
+        ],
+        [
+            'text'    => 'Products',
+            'icon'    => 'list',
+            'submenu' => [
+                [
+                    'text' => 'List products',
+                    'url'  => 'admin/products',
+                ],
+                [
+                    'text'    => 'Create product',
+                    'url'     => 'admin/products/new',
+                ]
+            ],
         ]
     ],
 

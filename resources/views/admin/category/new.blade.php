@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'List categorys')
+@section('title', 'New category')
 
 @section('content_header')
     <h1>{{ (empty($category["id"]) ? "Add" : "Edit") }} categories</h1>
