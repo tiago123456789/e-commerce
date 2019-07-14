@@ -17,4 +17,9 @@ class UserRepository extends Repository
     public function findByEmail($email) {
         return $this->getModel()->where("email", $email)->first();
     }
+
+    public function getRelationshipLoadingEager(): array
+    {
+        return [];
+    }
 }

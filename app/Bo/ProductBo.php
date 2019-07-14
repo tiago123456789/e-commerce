@@ -6,6 +6,7 @@ namespace App\Bo;
 
 use App\Exceptions\LogicNegociationException;
 use App\Exceptions\MessageException;
+use App\Exceptions\NotFoundException;
 use App\Repository\ProductRepository;
 use App\Service\Storage;
 
@@ -34,32 +35,55 @@ class ProductBo
         }
 
         $file = $newRegister["image"];
+        $newRegister["url_image"] = $this->doUploadImage($file);
+        unset($newRegister["image"]);
+        $productCreated = $this->repository->save($newRegister);
+        $this->repository->setCategoriesProduct($productCreated["id"], $newRegister["categories"]);
+    }
+
+
+    private function doUploadImage($file) {
         $nameFile = time() . $file->getClientOriginalName();
-        $newRegister["url_image"] = $this->storage->store(
+        return $this->storage->store(
             $nameFile, file_get_contents($file), "public"
         );
-        unset($newRegister["image"]);
-        $this->repository->save($newRegister);
     }
-//
-//    public function findById($id) {
-//        $user = $this->repository->findById($id);
-//        if (!$user) {
-//            throw new NotFoundException(MessageException::NOT_FOUND_REGISTER, ["Category"]);
-//        }
-//
-//        return $user;
-//    }
-//
-//    public function remove($id) {
-//        $this->findById($id);
-//        // TODO: Add rule check if category not associate a product.
-//        $this->repository->remove($id);
-//    }
-//
-//    public function update($id, array $datasModified) {
-//        $user = $this->findById($id);
-//        $this->repository->update($id, $datasModified);
-//    }
 
+    public function findById($id) {
+        $user = $this->repository->findById($id);
+        if (!$user) {
+            throw new NotFoundException(MessageException::NOT_FOUND_REGISTER, ["Product"]);
+        }
+
+        return $user;
+    }
+
+    public function remove($id) {
+        $product = $this->findById($id);
+        $this->repository->remove($id);
+        $nameImage = $this->getNameImage($product["url_image"]);
+        $this->storage->remove($nameImage);
+    }
+
+    public function update($id, array $datasModified) {
+        $product = $this->findById($id);
+        $categories = $datasModified["categories"];
+        unset($datasModified["categories"]);
+
+        $isChangeImage = $datasModified["image"];
+        if ($isChangeImage) {
+            $this->storage->remove($this->getNameImage($product["url_image"]));
+            $file = $datasModified["image"];
+            $datasModified["url_image"] = $this->doUploadImage($file);
+            unset($datasModified["image"]);
+        }
+
+        $this->repository->update($id, $datasModified);
+        $this->repository->setCategoriesProduct($id, $categories);
+
+    }
+
+    private function getNameImage($urlImage) {
+        return array_reverse(explode("/", $urlImage))[0];
+    }
 }

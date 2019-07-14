@@ -15,9 +15,18 @@ class ProductRepository extends Repository
         parent::__construct(new Product());
     }
 
+    public function setCategoriesProduct($idProduct, $idsCategories) {
+        $product = $this->findById($idProduct);
+        $product->categories()->sync($idsCategories);
+    }
+
     public function findByDescription(String $description) {
         $description = strtolower($description);
         return $this->getModel()->where(DB::raw("lower(description)", $description))->first();
     }
 
+    public function getRelationshipLoadingEager(): array
+    {
+        return [];
+    }
 }

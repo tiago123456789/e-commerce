@@ -10,13 +10,25 @@
     <div class="panel panel-default">
         <div class="panel-body">
             @include("elements.notifyError")
-            <form action="" method="post" enctype="multipart/form-data" >
+            <form action="{{ !empty($product["id"])
+                        ? route("product.edit", [ "id" => $product["id"]])
+                        : route("product.new") }}"
+                  method="post" enctype="multipart/form-data" >
                 {{ csrf_field() }}
                 <div class="form-group">
                     <label for="description">Description:</label>
                     <textarea name="description" id="description" class="form-control"
                               cols="30" rows="10">{{ $product["description"] ?? "" }}
                     </textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="categories">Categories:</label>
+                    <select name="categories[]" id="categories" multiple class="form-control">
+                        @foreach($categories as $key =>  $categoryItem)
+                            <option value="{{$categoryItem["id"]}}">{{$categoryItem["description"]}}</option>
+                        @endforeach
+                    </select>
                 </div>
 
                 <div class="form-group">
@@ -32,8 +44,8 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="heigth">Height:</label>
-                    <input type="text" id="height" name="height" value="{{ $product["heigth"] ?? "" }}"
+                    <label for="height">Height:</label>
+                    <input type="text" id="height" name="height" value="{{ $product["height"] ?? "" }}"
                            class="form-control" />
                 </div>
 
@@ -56,9 +68,15 @@
                 </div>
 
                 <div class="form-group">
-                    <img id="image_preview" class="hidden"
-                         src=""
-                         width="200" height="100" alt="Preview image" />
+                    @if (!empty($product["url_image"]))
+                        <img id="image_preview" class=""
+                             src="{{$product['url_image']}}"
+                             width="200" height="100" alt="Preview image" />
+                    @else
+                        <img id="image_preview" class="hidden"
+                             src=""
+                             width="200" height="100" alt="Preview image" />
+                    @endif
                 </div>
 
                 <div class="form-group">

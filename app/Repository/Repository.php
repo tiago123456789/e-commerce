@@ -21,19 +21,30 @@ abstract class Repository
     }
 
     public function save($newRegister) {
-        $this->getNamespaceModel()::create($newRegister);
+        return $this->getNamespaceModel()::create($newRegister);
     }
 
     public function findAll(array $fieldsReturn = []) {
         $wasInformatedFieldsReturn = count($fieldsReturn) > 0;
-        if ($wasInformatedFieldsReturn) {
-            return $this->getNamespaceModel()::all();
-        } else {
+        $hasRelationshipLoadingEager = count($this->getRelationshipLoadingEager()) > 0;
+        if ($hasRelationshipLoadingEager && !$wasInformatedFieldsReturn) {
+            return $this->getNamespaceModel()::with($this->getRelationshipLoadingEager())->get();
+        } else if($hasRelationshipLoadingEager && $wasInformatedFieldsReturn) {
+            return $this->getNamespaceModel()::with($this->getRelationshipLoadingEager())->get($fieldsReturn);
+        } else if (!$hasRelationshipLoadingEager && $wasInformatedFieldsReturn) {
             return $this->getNamespaceModel()::all($fieldsReturn);
+        } else {
+            return $this->getNamespaceModel()::all();
         }
     }
 
     public function findById($id) {
+        $hasRelationshipLoadingEager = count($this->getRelationshipLoadingEager()) > 0;
+        if ($hasRelationshipLoadingEager) {
+            return $this->model->where("id", $id)
+                ->with($this->getRelationshipLoadingEager())
+                ->first();
+        }
         return $this->model->where("id", $id)->first();
     }
 
@@ -44,6 +55,9 @@ abstract class Repository
     public function update($id, $datasModified) {
         $this->getNamespaceModel()::where("id", $id)->update($datasModified);
     }
+
+    abstract public function getRelationshipLoadingEager(): array;
+
 
     private function getNamespaceModel() {
         return get_class($this->model);

@@ -22,6 +22,10 @@ Route::prefix("admin")
         Route::get("products", "ProductController@index")->name("product.list");
         Route::get("products/new", "ProductController@newPage")->name("product.new");
         Route::post("products/new", "ProductController@save")->name("product.new");
+        Route::get("products/{id}/remove", "ProductController@remove")->name("product.remove");
+        Route::get("products/{id}/edit", "ProductController@edit")->name("product.edit.page");
+        Route::post("products/{id}/edit", "ProductController@update")->name("product.edit");
+
 
         Route::get("categories", "CategoryController@index")->name("category.list");
         Route::get("categories/new", "CategoryController@newPage")->name("category.new");

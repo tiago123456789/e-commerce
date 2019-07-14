@@ -35,15 +35,15 @@
                             <td>{{ $product["length"] }}</td>
                             <td>{{ $product["weight"] }}</td>
                             <td>
-                                    {{--<a onclick="return confirm('Want remove register?')"--}}
-                                       {{--href="{{ route("product.remove", [ "id" => $product["id"] ]) }}"--}}
-                                       {{--class="btn btn-danger">--}}
-                                        {{--<i class="fa fa-trash"></i>--}}
-                                    {{--</a>--}}
-                                    {{--<a href="{{ route("product.edit.page", [ "id" => $product["id"]]) }}"--}}
-                                    {{--class="btn btn-warning">--}}
-                                        {{--<i class="fa fa-pencil"></i>--}}
-                                    {{--</a>--}}
+                                    <a onclick="return confirm('Want remove register?')"
+                                       href="{{ route("product.remove", [ "id" => $product["id"] ]) }}"
+                                       class="btn btn-danger">
+                                        <i class="fa fa-trash"></i>
+                                    </a>
+                                    <a href="{{ route("product.edit.page", [ "id" => $product["id"]]) }}"
+                                    class="btn btn-warning">
+                                        <i class="fa fa-pencil"></i>
+                                    </a>
                             </td>
                         </tr>
                      @endforeach

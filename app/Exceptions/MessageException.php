@@ -12,11 +12,13 @@ class MessageException
     CONST EMAIL_USED = "EMAIL_USED";
     CONST DESCRIPTION_USED = "DESCRIPTION_USED";
     CONST NOT_FOUND_REGISTER = "EMAIL_USED";
+    CONST PRODUCTS_ASSOCIATE_CATEGORY = "PRODUCTS_ASSOCIATE_CATEGORY";
 
     private static $messages = [
         MessageException::EMAIL_USED => "Email used per other user.",
         MessageException::DESCRIPTION_USED => "Description already used",
         MessageException::NOT_FOUND_REGISTER => MessageException::PARAM_DYNAMIC_MESSAGE . " not found!",
+        MessageException::PRODUCTS_ASSOCIATE_CATEGORY => "Category can't removed,  due category associate one or more than products"
 
     ];
 

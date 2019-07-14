@@ -47,7 +47,10 @@ class CategoryBo
 
     public function remove($id) {
         $this->findById($id);
-        // TODO: Add rule check if category not associate a product.
+        $hasProductsAssociate = $this->repository->hasProductsAssociate($id);
+        if ($hasProductsAssociate) {
+            throw new LogicNegociationException(MessageException::PRODUCTS_ASSOCIATE_CATEGORY);
+        }
         $this->repository->remove($id);
     }
 
