@@ -23,11 +23,23 @@ class ProductBo
         $this->storage = $storage;
     }
 
-    public function findAll(array $fieldsReturn = []) {
+    public function findAllPaginate(array $fieldsReturn = [])
+    {
+        return $this->repository->findAllPaginate($fieldsReturn);
+    }
+
+    public function findAll(array $fieldsReturn = [])
+    {
         return $this->repository->findAll($fieldsReturn);
     }
 
-    public function save($newRegister) {
+    public function findAllByCateoryPaginate($idCategory)
+    {
+        return $this->repository->findAllByCateoryPaginate($idCategory);
+    }
+
+    public function save($newRegister)
+    {
         $hasRegisterWithDescription = $this->repository->findByDescription($newRegister["description"]);
 
         if ($hasRegisterWithDescription) {
@@ -42,7 +54,8 @@ class ProductBo
     }
 
 
-    private function doUploadImage($file) {
+    private function doUploadImage($file)
+    {
         $nameFile = time() . $file->getClientOriginalName();
         return $this->storage->store(
             $nameFile, file_get_contents($file), "public"

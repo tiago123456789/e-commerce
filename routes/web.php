@@ -11,6 +11,9 @@
 |
 */
 
+Route::get("/site", "SiteController@index");
+Route::get("/produtos", "SiteController@pageProduct");
+Route::get("/produtos/categoria/{idCategory}", "SiteController@pageProduct");
 Route::get('/', function () {
     return view('welcome');
 });
