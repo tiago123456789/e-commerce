@@ -40,7 +40,7 @@ class ProductRepository extends Repository
             ->with(array( "categories" => function($query) {
                 $query->select("description");
             }))
-            ->get(["id", "description", "url_image", "price"])
+            ->get(["title", "id", "description", "url_image", "price"])
             ->first();
     }
 

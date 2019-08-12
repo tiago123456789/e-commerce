@@ -16,7 +16,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="product-bit-title text-center">
-                    <h2>Sony Smart TV - 2015</h2>
+                    <h2>{{$product["title"]}}</h2>
                 </div>
             </div>
         </div>
@@ -40,7 +40,7 @@
 
                         <div class="col-sm-6">
                             <div class="product-inner">
-                                <h2 class="product-name">Sony Smart TV - 2015</h2>
+                                <h2 class="product-name">{{$product["title"]}}</h2>
                                 <div class="product-inner-price">
                                     <ins>${{$product["price"]}}</ins>
                                 </div>

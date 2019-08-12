@@ -37,7 +37,10 @@
                             <div class="product-upper">
                                 <img src="{{$product["url_image"]}}" alt="">
                             </div>
-                            <h2><a href="">{{$product["description"]}}</a></h2>
+                            <h2>
+                                <a href="{{route("product-detail", ["id" => $product["id"] ])}}">
+                                    {{$product["title"]}}</a>
+                                </h2>
                             <div class="product-carousel-price">
                                 <ins>R$ {{$product["price"]}}</ins>
                             </div>

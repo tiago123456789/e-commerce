@@ -32,7 +32,7 @@ class SiteController extends Controller
             $category = $this->categoryBo->findById($idCategory);
             $products = $this->productBo->findAllByCateoryPaginate($idCategory);
         } else {
-            $products = $this->productBo->findAllPaginate(["id", "description", "price", "url_image"]);
+            $products = $this->productBo->findAllPaginate(["id", "title", "description", "price", "url_image"]);
         }
         return view("site.produtos", compact("products", "categories", 'category'));
     }
