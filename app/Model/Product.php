@@ -9,7 +9,7 @@ class Product extends Model
 
     protected $fillable = [
         "description", "price", "width", "height",
-        "length", "weight", "url_image"
+        "length", "weight", "url_image", "title"
     ];
 
     public function categories() {

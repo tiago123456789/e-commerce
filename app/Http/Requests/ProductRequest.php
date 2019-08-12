@@ -31,6 +31,7 @@ class ProductRequest extends FormRequest
             "length" => "required|min:1",
             "weight" => "required|min:1",
             "image" => "required|image|max:2048",
+            "title" => "required|min:2|max:120"
         ];
     }
 }

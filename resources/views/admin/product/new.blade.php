@@ -15,6 +15,13 @@
                         : route("product.new") }}"
                   method="post" enctype="multipart/form-data" >
                 {{ csrf_field() }}
+
+                <div class="form-group">
+                    <label for="title">Title:</label>
+                    <input type="text" id="title" name="title" value="{{ $product["title"] ?? "" }}"
+                           class="form-control" />
+                </div>
+
                 <div class="form-group">
                     <label for="description">Description:</label>
                     <textarea name="description" id="description" class="form-control"
