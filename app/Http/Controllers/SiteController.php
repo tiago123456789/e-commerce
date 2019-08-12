@@ -40,7 +40,6 @@ class SiteController extends Controller
     public function pageProductDetails($id)
     {
         $product = $this->productBo->findById($id);
-//        dd($product);
         return view("site.productDetails", compact("product"));
     }
 }
