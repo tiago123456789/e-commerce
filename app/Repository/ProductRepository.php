@@ -34,6 +34,16 @@ class ProductRepository extends Repository
             })->paginate();
     }
 
+    public function findById($id)
+    {
+        return $this->getModel()
+            ->with(array( "categories" => function($query) {
+                $query->select("description");
+            }))
+            ->get(["id", "description", "url_image", "price"])
+            ->first();
+    }
+
     public function getRelationshipLoadingEager(): array
     {
         return [];

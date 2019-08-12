@@ -36,4 +36,11 @@ class SiteController extends Controller
         }
         return view("site.produtos", compact("products", "categories", 'category'));
     }
+
+    public function pageProductDetails($id)
+    {
+        $product = $this->productBo->findById($id);
+//        dd($product);
+        return view("site.productDetails", compact("product"));
+    }
 }
