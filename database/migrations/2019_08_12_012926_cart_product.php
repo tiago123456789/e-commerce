@@ -13,7 +13,19 @@ class CartProduct extends Migration
      */
     public function up()
     {
-        //
+        Schema::create("carts_products", function(Blueprint $table) {
+            $table->bigIncrements("id");
+            $table->unsignedInteger("cart_id");
+            $table->unsignedInteger("product_id");
+            $table->integer("quantity");
+
+            $table->foreign("cart_id")->references("id")->on("carts")
+                ->onDelete("cascade");
+            $table->foreign("product_id")->references("id")->on("products")
+                ->onDelete("cascade");
+
+            $table->timestamps();
+        });
     }
 
     /**
@@ -23,6 +35,6 @@ class CartProduct extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists("carts_products");
     }
 }

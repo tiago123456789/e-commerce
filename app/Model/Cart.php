@@ -13,4 +13,10 @@ class Cart extends Model
     protected $hidden = [
         "created_at", "updated_at"
     ];
+
+    public function products()
+    {
+        return $this->belongsToMany(CartProduct::class,
+            "carts_products", "cart_id", "product_id");
+    }
 }
